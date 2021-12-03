@@ -11,7 +11,7 @@ def main(args):
     if args.v:
         warningBuffer = []
     n = args.l
-a
+
     # Main loop
     for _ in range(n):
         while True:
