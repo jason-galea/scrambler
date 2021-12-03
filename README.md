@@ -4,8 +4,8 @@ A quick and easy Rubiks cube scramble generator, inspired by u/N4Cubing [here.](
 
 Features:
 
-- Choose your own scramble length
-- No repeating moves
+- No repeating moves (Eg. "U U")
+- No redundant moves (Eg. "R L R")
 - 1/3 chance for double/inverse/normal moves
-
-Still working on redundant move cancellation, see the [issues](https://github.com/jason-galea/scrambler/issues) page for more detail.
+- "-l" to choose your own scramble length
+- "-v" to show warnings when repeating/redundant moves are found & regenerated
