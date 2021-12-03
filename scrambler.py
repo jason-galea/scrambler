@@ -1,19 +1,25 @@
 from random import randint
+from sys import argv
+import argparse
 
+# Constants
 MOVES = ["U", "D", "L", "R", "F", "B"]
-OPPOSITES = ["D", "U", "R", "L", "B", "F"] # Wasteful, but simplifies logic/data restructuring
+OPPOSITES = ["D", "U", "R", "L", "B", "F"] # Wasteful, but simplifies logic/data structure
 
 def main():
-    try:
-        n = int(input("\nEnter the scramble length: "))
-    except:
-        exit("ERROR: Please enter a numerical value\n")
+    # Local variables
+    prevMove1 = ""
+    prevMove2 = ""
+    showWarnings = False
+    if showWarnings:
+        warningBuffer = []
 
-    previousMove1 = ""
-    previousMove2 = ""
-    showWarnings = True
-    # showWarnings = False
-    warningBuffer = []
+    if (True): # TODO: Check if n is defined?
+        try:
+            n = int(input("\nEnter the scramble length: "))
+        except:
+            exit("ERROR: Please enter a numerical value\n")
+
 
     for _ in range(n):
         while True:
@@ -21,19 +27,20 @@ def main():
             move = MOVES[r1]
 
             # Ensure moves are not repeated
-            if (move is previousMove1):
-                warningBuffer.append(f"WARNING: Duplicate move found: {move}")
+            if (move is prevMove1):
+                if showWarnings:
+                    warningBuffer.append(f"WARNING: Duplicate move found: {move}")
                 continue
 
             # Ensure moves are not redundant, such as U D U'
-            if (move is previousMove2) and (previousMove1 is OPPOSITES[r1]):
-                warningBuffer.append(f"WARNING: Redundant moves found: {move} {previousMove1} {previousMove2}")
+            if (move is prevMove2) and (prevMove1 is OPPOSITES[r1]):
+                if showWarnings:
+                    warningBuffer.append(f"WARNING: Redundant moves found: {move} {prevMove1} {prevMove2}")
                 continue
-
-            previousMove2 = previousMove1
-            previousMove1 = move
+            
+            prevMove2 = prevMove1
+            prevMove1 = move
             break
-
 
         # Double/inverse/normal move
         r2 = randint(0, 2)
@@ -53,4 +60,12 @@ def main():
     exit(1)
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("")
+    #
+    #
+    #
+
+    args = parser.parse_args()
+    
+    main(args.name)
